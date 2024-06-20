@@ -1,0 +1,36 @@
+//Given three non-collinear points whose co-ordinates are p(p1, p2), q(q1, q2) and r(r1, r2) in the X-Y plane. Return the number of integral / lattice points strictly inside the triangle formed by these points.
+Note: - A point in the X-Y plane is said to be an integral / lattice point if both its coordinates are integral.
+
+Input: p = (62,-3), q = (5,-45), r = (-19,-23)
+Output: 1129
+Explanation: There are 1129 integral points in the triangle formed by p, q and r.
+
+solution : 
+
+class Solution {
+  public:
+    long long int InternalCount(long long int p[], long long int q[],
+                                long long int r[]) {
+        // code here
+        //here we are using picks theorem
+        //A=I+B/2-1;
+        long long A=abs((p[0]*(q[1]-r[1]))+(q[0]*(r[1]-p[1]))+(r[0]*(p[1]-q[1])));
+        A=A/2;
+        long long pq=gcd(abs(p[0]-q[0]),abs(p[1]-q[1]));
+        long long qr=gcd(abs(q[0]-r[0]),abs(q[1]-r[1]));
+        long long pr=gcd(abs(p[0]-r[0]),abs(p[1]-r[1]));
+        long long B=pq+qr+pr;
+        long long I=A-(B/2)+1;
+        return I;
+        
+        
+    }
+    int gcd(int a, int b) {
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
+    }
+};
