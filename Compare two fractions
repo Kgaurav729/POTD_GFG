@@ -1,0 +1,69 @@
+You are given a string str containing two fractions a/b and c/d, compare them and return the greater. If they are equal, then return "equal".
+
+Note: The string str contains "a/b, c/d"(fractions are separated by comma(,) & space( )). 
+
+Examples
+
+Input: str = "5/6, 11/45"
+Output: 5/6
+Explanation: 5/6=0.8333 and 11/45=0.2444, So 5/6 is greater fraction.
+
+
+approach - here we are iterating through the string as we get comma we adding the first fraction in string first and as we end loop we adding second fraction in string second . 
+we are also maintaining temp1 and temp2 string to return the string variable . as soon as we get "," we are adding temp2 value to temp1 which is  obvisously first fraction in 
+string format. 
+
+
+
+#include <iostream>
+#include <string>
+class Solution {
+  public:
+    string compareFrac(string str) {
+
+        // Code here
+        string temp1="",temp2="";
+        int a=0,b=0;
+        double first,second;
+        bool ind=false;
+        
+        for(char ch:str){
+            if(ch=='/'){
+                ind=true;
+                temp2+=ch;
+                continue;
+            }
+            else if(ch==','){
+                ind=false;
+                first=(double)a/b;
+                a=0;
+                b=0;
+                temp1=temp2;
+                temp2="";
+                continue;
+            }
+            else if(ch==' '){
+                continue;
+            }
+            temp2+=ch;
+            if(!ind){
+                a=a*10+(ch-'0');
+            }
+            else{
+                b=b*10+(ch-'0');
+            }
+        
+        }
+        second=(double)a/b;
+        if(first>second){
+            return temp1;
+        }
+        else if(second>first){
+            return temp2;
+        }
+        else{
+            return "equal";
+        }
+    }
+        
+};
