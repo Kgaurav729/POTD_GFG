@@ -1,0 +1,43 @@
+Extract the Number from the String
+
+Given a sentence containing several words and numbers. Find the largest number among them which does not contain 9. If no such number exists, return -1.
+
+Note: Numbers and words are separated by spaces only.
+
+Examples :
+
+Input: sentence="This is alpha 5057 and 97"
+Output: 5057
+Explanation: 5057 is the only number that does not have a 9.
+
+Approach - Iterate through string . basic conditions to check digit and indication is used to check number  9 is present or not and space is used to make ind false again.
+
+class Solution {
+  public:
+    long long ExtractNumber(string sentence) {
+
+        // code here
+        long long ans=0,temp=0;
+        bool ind=false;
+        for(char ch:sentence){
+            if(isdigit(ch)){
+                temp=temp*10+(ch-'0');
+                if(ch=='9'){
+                    ind=true;
+                }
+                
+            }
+            else if(ch==' '){
+                if(!ind){
+                    ans=max(ans,temp);
+                }
+                ind=false;
+                temp=0;
+            }
+        }
+        if(!ind){
+            ans=max(ans,temp);
+        }
+        return ans==0?-1:ans;
+    }
+};
