@@ -1,0 +1,40 @@
+A matrix is constructed of size n*n and given an integer ‘q’. The value at every cell of the matrix is given as, M(i,j) = i+j, where ‘M(i,j)' is the value of a cell, ‘i’ is the row number, and ‘j’ is the column number. Return the number of cells having value ‘q’.
+
+Note: Assume, the array is in 1-based indexing.
+
+Examples:
+
+Input: n = 4, q = 7
+Output: 2
+Explanation: Matrix becomes
+2 3 4 5 
+3 4 5 6 
+4 5 6 7
+5 6 7 8
+The count of 7 is 2.
+
+Approach simple if else condition 
+condition 1;
+min element =2 && max element in matrix=2*n
+condition 2:
+if n>=q ans would be q-1 
+condition 3:
+this condition is if n<q 
+return n -q+n+1 == 2n-q+1
+
+class Solution {
+  public:
+    long long sumMatrix(long long n, long long q) {
+        // code here]
+        if(q<2 || q>2*n){
+            return 0;
+        }
+        else if(n>=q){
+            return q-1;
+        }
+        else{
+            long long temp=q-n;
+            return n-(temp-1);
+        }
+    }
+};
