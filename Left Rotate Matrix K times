@@ -1,0 +1,37 @@
+You are given an integer k and matrix mat. Rotate the elements of the given matrix to the left k times and return the resulting matrix.
+
+Examples:
+
+Input: k=1, mat=[[1,2,3],[4,5,6],[7,8,9]]
+Output:
+2 3 1
+5 6 4
+8 9 7
+Explanation: Rotate the matrix by one
+1 2 3       2 3 1
+4 5 6  =>  5 6 4
+7 8 9       8 9 7
+
+Approach - 
+for row we can reverse the row first then again reverse the elements upto kth element of row seperately and other elements after kth to end . we will get the required row. 
+iterate through the rows of mat and do the above process for every row.
+
+for the case if k > column size use the mod operator.
+
+
+class Solution {
+  public:
+    vector<vector<int>> rotateMatrix(int k, vector<vector<int>> mat) {
+        // code here
+        int n=mat.size();
+        int c=mat[0].size();
+        k=k%c;
+        for(auto &row:mat){
+            reverse(row.begin(),row.end());
+            reverse(row.rbegin(),row.rbegin()+k);
+            reverse(row.rbegin()+k,row.rend());
+            
+        }
+        return mat;
+    }
+};
