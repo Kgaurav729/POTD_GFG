@@ -1,0 +1,34 @@
+Given a linked list with string data, check whether the combined string formed is palindrome. If the combined string is palindrome then return true otherwise return false.
+
+Example:
+
+Input:
+
+Output : true
+Explanation: As string "abcddcba" is palindrome the function should return true.
+
+Approach - create empty string and add all character in the string while iterating through linked list values. and then normal palindrome code.
+
+class Solution {
+  public:
+    bool compute(Node* head) {
+        // Your code goes here
+        string temp="";
+        Node *curr=head;
+        while(curr!=NULL){
+            temp+=curr->data;
+            curr=curr->next;
+        }
+        int i=0;
+        int j=temp.length()-1;
+        while(i<=j){
+            if(temp[i]!=temp[j]){
+                return false;
+            }
+            i++;
+            j--;
+            
+        }
+        return true;
+    }
+};
