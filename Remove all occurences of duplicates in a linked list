@@ -1,0 +1,48 @@
+Given a sorted linked list, delete all nodes that have duplicate numbers (all occurrences), leaving only numbers that appear once in the original list, and return the head of the modified linked list. 
+
+Examples:
+
+Input: Linked List = 23->28->28->35->49->49->53->53
+Output: 23 35
+Explanation: 
+The duplicate numbers are 28, 49 and 53 which are removed from the list.
+
+Solution -:
+
+class Solution {
+  public:
+    Node* removeAllDuplicates(struct Node* head) {
+        // code here
+        Node *prev=NULL;
+        Node *temp=head;
+        
+        while(temp!=NULL){
+            int count=0;
+            while(temp!=NULL && temp->next!=NULL){
+                if(temp->data==temp->next->data){
+                    temp=temp->next;
+                    count++;
+                }
+                else{
+                    break;
+                }
+            }
+            if(count>0){
+                if(prev!=NULL){
+                    prev->next=temp->next;
+                    temp=prev->next;
+                }
+                else{
+                    head=temp->next;
+                    temp=head;
+                }
+            }
+            else{
+                prev=temp;
+                temp=temp->next;
+            }
+            
+        }
+        return head;
+    }
+};
