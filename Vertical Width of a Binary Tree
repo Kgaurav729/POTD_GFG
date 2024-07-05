@@ -1,0 +1,60 @@
+Given a Binary Tree. You need to find and return the vertical width of the tree.
+
+Examples :
+
+Input:
+         1
+       /    \
+      2      3
+     / \    /  \
+    4   5  6   7
+            \   \
+             8   9
+Output: 6
+Explanation: The width of a binary tree is
+the number of vertical paths in that tree.
+
+
+
+The above tree contains 6 vertical lines.
+
+solution - if we are pointing towards left , subtract pos by 1 or else add 1 in pos. this will give us count of verticle lines
+
+
+class Solution {
+    public:
+    // Function to find the vertical width of a Binary Tree.
+    // int leftsum(Node *curr){
+    //     if(curr==NULL){
+    //         return 0;
+    //     }
+    //     return leftsum(curr->left)+1;
+    // }
+    // int rightsum(Node *curr){
+    //     if(curr==NULL){
+    //         return 0;
+    //     }
+    //     return leftsum(curr->right)+1;
+    // }
+    
+    void check(Node *root,int &mr,int &ml,int pos){
+        if(root==NULL){
+            return;
+        }
+        ml=min(ml,pos);
+        mr=max(mr,pos);
+        check(root->left,mr,ml,pos-1);
+        check(root->right,mr,ml,pos+1);
+    }
+    int verticalWidth(Node *root) {
+        // code here
+        if(root==NULL){
+            return 0;
+        }
+        int mr=0;
+        int ml=0;
+        check(root,mr,ml,0);
+        return mr+abs(ml)+1;
+        
+    }
+};
